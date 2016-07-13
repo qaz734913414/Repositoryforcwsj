@@ -19,7 +19,7 @@ import com.fh.util.PageData;
 public class LoginBLH {
 
 	@Resource(name = "daoSupport")
-	private DaoSupport dao;
+	private DaoSupport   dao;
 	
 	//======================================================================================
 	
