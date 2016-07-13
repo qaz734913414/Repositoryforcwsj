@@ -19,7 +19,7 @@ import com.fh.util.PageData;
 public class LoginBLH {
 
 	@Resource(name = "daoSupport")
-	private DaoSupport   dao;
+	private DaoSupport dao;
 	
 	//======================================================================================
 	
@@ -27,6 +27,7 @@ public class LoginBLH {
 	*通过id获取数据
 	*/
 	public User getUserAndRoleById(String USER_ID) throws Exception {
+		//1=1
 		return (User) dao.findForObject("SysXMapper.getUserAndRoleById", USER_ID);
 	}
 
