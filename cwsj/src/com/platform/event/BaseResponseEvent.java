@@ -9,6 +9,7 @@ public class BaseResponseEvent
   private long costTime;
   private Map cache;
   private String page;
+  private String select;
 
   public BaseResponseEvent()
   {
@@ -49,5 +50,8 @@ public class BaseResponseEvent
   public void addPage(String page) {
 	  this.cache.put("page", page);
   }
-
+  
+  public void addSelect(String select) {
+	  this.cache.put("select", select);
+  }
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="YsjglMapper">
+	
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  
+	<!-- 判断用户名和密码 -->
+	<select id="listQuerryBzsjx" parameterType="pd" resultMap="bzsjxResultMap">
+		select t.BZSJX_XH,t.BZSJX_MC,t.LR_SJ from t_sj_ysj_bzsjx t,t_sj_ysj_ysjfl f
+		where t.YSJFL_XH=f.YSJFL_XH and t.XY_BJ=1 
+
+		order by t.PX_XH ASC
+	</select>	
+	<resultMap type="BzsjxVO" id="bzsjxResultMap">
+		<id column="BZSJX_XH" property="BZSJX_XH"/>
+		<result column="BZSJX_MC" property="BZSJX_MC"/>
+	</resultMap>
+</mapper>

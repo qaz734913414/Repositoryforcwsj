@@ -15,6 +15,7 @@
 		<typeAlias type="com.fh.entity.system.Menu" alias="Menu"/>
 		<typeAlias type="com.cwsj.vo.login.Gnzy" alias="Gnzy"/>
 		<typeAlias type="com.fh.util.PageData" alias="pd"/>
+		<typeAlias type="com.cwsj.vo.ysjgl.BzsjxVO" alias="BzsjxVO"/>
 		<!-- 分页 -->
 		<typeAlias type="com.fh.entity.Page" alias="Page"/>
 	</typeAliases>
@@ -25,5 +26,19 @@
 			<property name="pageSqlId" value=".*listPage.*"/>
 		</plugin>
 	</plugins>
-	
+<!-- 当使用反射机制时，不能通过SPRING的依赖注入自动调用数据库，必须配置mybatis配置文件，单独手工调用数据源 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://localhost:3306/tax_audit?Unicode=true&amp;characterEncoding=utf8" />
+                <property name="username" value="root" />
+                <property name="password" value="root123" />
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mybatis/cwsj/YsjglMapper.xml"/>
+    </mappers>	
 </configuration>
