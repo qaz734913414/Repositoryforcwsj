@@ -1,8 +1,10 @@
 package com.platform.ctrl;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -101,8 +103,37 @@ public class GeneralCtrl extends BaseController {
 			res=(BaseResponseEvent)targetBizMethod.invoke(obj, pageData);
 		}
 		//System.out.println(System.getProperty("user.dir"));
+		mv=this.toPage(res,mv);
 		mv.setViewName((String) res.get("page"));
 		mv.addObject("pd",pageData);
 		return mv;
+	}
+/**
+ * 将逻辑层处理的返回对象转换为页面对象显示到页面上	
+ * @param res
+ * @param mv
+ * @return
+ * @throws NoSuchMethodException 
+ * @throws SecurityException 
+ */
+	private ModelAndView toPage(BaseResponseEvent res,ModelAndView mv) throws SecurityException, NoSuchMethodException{
+		HashMap cachemap=(HashMap) res.getCache();
+		Field[] field = res.getClass().getDeclaredFields();   
+		for(int j=0 ; j<field.length ; j++){ 
+			String name = field[j].getName(); 
+			String type = field[j].getGenericType().toString(); 
+            if(type.equals("class java.util.HashMap")){
+        		Map objmap=(HashMap) cachemap.get(name);
+        		if(objmap!=null){
+            		Iterator it =objmap.keySet().iterator();
+            		while (it.hasNext()) {
+            			String key = it.next().toString(); 
+            			mv.addObject(key,objmap.get(key));
+            		}       			
+        		}
+            }
+		}
+		
+		return mv;		
 	}
 }

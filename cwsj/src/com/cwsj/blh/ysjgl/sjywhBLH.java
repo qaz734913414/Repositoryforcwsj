@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.cwsj.vo.login.Gnzy;
 import com.cwsj.vo.ysjgl.BzsjxVO;
 import com.fh.dao.DaoSupport;
+import com.fh.entity.system.Menu;
 import com.fh.entity.system.Role;
 import com.fh.util.PageData;
 import com.platform.event.BaseResponseEvent;
@@ -23,6 +24,8 @@ public class sjywhBLH {
 		BaseResponseEvent res=new BaseResponseEvent();
 		List<BzsjxVO> list=new ArrayList<BzsjxVO>();		
 		list=(List<BzsjxVO>) BaseDAO.getInstance().findForList("YsjglMapper.listQuerryBzsjx", null);
+		List<Map> sjxdlList =(List<Map>) BaseDAO.getInstance().findForList("YsjglMapper.listQuerrySjxdl", null);
+		res.addSelect("sjxdlList", sjxdlList);
 		res.addPage("ysjgl/ysj_list");
 		return res;
 	}
