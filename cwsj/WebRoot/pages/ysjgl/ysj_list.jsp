@@ -40,8 +40,9 @@
 					<form class="form-search">
 					           <label class="control-label">标准数据大类</label>
 							      <select id="form-field-select-1">
-											  <option value="AL">企业会计准则</option>
-											  <option value='AL'>小企业会计准则</option>
+										<c:forEach items="${sjxdlList}" var="sjxdl">
+											<option value="${sjxdl.YSJFL_XH }" onclick="">${sjxdl.YSJFL_MC }</option>
+										</c:forEach>
 							       </select>
 						
 				                <label class="control-label">标准数据小类</label> 
